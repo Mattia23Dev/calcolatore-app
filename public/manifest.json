@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Quanto costa creare un app?",
+  "name": "Calcola il preventivo app.",
   "icons": [
     {
       "src": "favicon.ico",
