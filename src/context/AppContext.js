@@ -11,6 +11,14 @@ export function formatNumber(num) {
 export function AppProvider({ children }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
+  const [leadData, setLeadData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    companyName: "",
+    projectSummary: "",
+    accept: false,
+  })
   const [answers, setAnswers] = useState([{
     answer: '',
     increment: 0,
@@ -64,7 +72,7 @@ export function AppProvider({ children }) {
   }
 
   return (
-    <AppContext.Provider value={{ currentStep, totalCost, answers, handleRicomincia, handleAnswer, goBack, setCurrentStep }}>
+    <AppContext.Provider value={{ currentStep, totalCost, answers, leadData, setLeadData, handleRicomincia, handleAnswer, goBack, setCurrentStep }}>
       {children}
     </AppContext.Provider>
   );

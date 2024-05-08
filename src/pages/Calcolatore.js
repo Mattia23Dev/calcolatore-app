@@ -46,7 +46,7 @@ function SocialShare() {
     );
   }
   
-const Calcolatore = () => {
+const Calcolatore = ({setShowPopup}) => {
     const { currentStep, handleAnswer, totalCost, goBack, setCurrentStep, answers, handleRicomincia } = useAppContext();
     console.log(answers)
   return (
@@ -288,7 +288,7 @@ const Calcolatore = () => {
             <h2>Il costo stimato per la tua app è</h2>
             <h3>{formatNumber(totalCost)} €</h3>
             <p>In Nova42 selezioniamo i migliori sviluppatori di app e siti web per i tuoi progetti. Pubblica il tuo progetto in Yeeply o guarda alcuni dei nostri casi di successo.</p>
-            <button className='shiny-effect'>Crea il tuo progetto</button>
+            <button onClick={() => setShowPopup(true)} className='shiny-effect'>Crea il tuo progetto</button>
         </div>
         }
         <div className='calcolatore-fisso'>
