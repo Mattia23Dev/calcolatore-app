@@ -3,17 +3,17 @@
   "name": "Calcola il preventivo app.",
   "icons": [
     {
-      "src": "logonova.png",
+      "src": "logoot.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logonova.png",
+      "src": "logoot.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logonova.png",
+      "src": "logoot.png",
       "type": "image/png",
       "sizes": "512x512"
     }

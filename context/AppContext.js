@@ -18,59 +18,53 @@ export function AppProvider({ children }) {
     companyName: "",
     projectSummary: "",
     accept: false,
-  })
-  const [answers, setAnswers] = useState([{
-    answer: '',
-    increment: 0,
-  }]);
+  });
+  const [answers, setAnswers] = useState([]);
 
   const handleAnswer = (cost, percent, newAnswer) => {
     let newIncrement;
-    if (currentStep === 1 || currentStep === 2){
-        newIncrement = cost;
-        const newTotal = totalCost + cost;
-        setTotalCost(newTotal);
-        const nextStep = currentStep + 1;
-        setCurrentStep(nextStep);   
-        setAnswers([...answers, { answer: newAnswer, increment: newIncrement }]);    
+    let newTotal;
+    const nextStep = currentStep + 1;
+
+    if (currentStep === 1 || currentStep === 2) {
+      newIncrement = cost;
+      newTotal = totalCost + cost;
     } else {
-        if (percent !== 0){
-            const newPercent = totalCost * percent;
-            const newTotal = totalCost + newPercent;
-            newIncrement = newPercent;
-            setTotalCost(newTotal);
-            const nextStep = currentStep + 1;
-            setCurrentStep(nextStep)
-            setAnswers([...answers, { answer: newAnswer, increment: newIncrement }]); 
-        } else {
-            const nextStep = currentStep + 1;
-            setCurrentStep(nextStep);
-            newIncrement = 0;
-            setAnswers([...answers, { answer: newAnswer, increment: newIncrement }]);
-        }
+      if (percent !== 0) {
+        newIncrement = totalCost * percent;
+        newTotal = totalCost + newIncrement;
+      } else {
+        newIncrement = 0;
+        newTotal = totalCost;
+      }
     }
+
+    setTotalCost(newTotal);
+
+    // Aggiorna la risposta esistente o aggiungine una nuova
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentStep - 1] = { answer: newAnswer, increment: newIncrement };
+    setAnswers(updatedAnswers);
+
+    setCurrentStep(nextStep);
   };
 
   const goBack = () => {
-    if (currentStep > 0) {
-      if (answers.length > 0) {
-        const lastAnswer = answers.pop();
-  
-        const newTotal = totalCost - lastAnswer.increment;
-        setTotalCost(newTotal);
-  
-        setAnswers([...answers]);
-      }
-  
-      setCurrentStep(currentStep - 1);
+    if (currentStep > 1) {
+      const previousStep = currentStep - 1;
+      setCurrentStep(previousStep);
+
+      // Rimuovi l'ultima risposta se si torna indietro
+      const updatedAnswers = answers.slice(0, previousStep - 1);
+      setAnswers(updatedAnswers);
     }
   };
 
   const handleRicomincia = () => {
-    setAnswers([])
-    setCurrentStep(0)
-    setTotalCost(0)
-  }
+    setAnswers([]);
+    setCurrentStep(0);
+    setTotalCost(0);
+  };
 
   return (
     <AppContext.Provider value={{ currentStep, totalCost, answers, leadData, setLeadData, handleRicomincia, handleAnswer, goBack, setCurrentStep }}>
